@@ -1,0 +1,18 @@
+# [[1, 5], [2, 4], [3, 8], [6, 7], [10, 11]]
+# [[1, 8], [10, 11]]
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        res = []
+        intervals.sort()
+        for start, end in intervals:
+            if len(res) == 0:
+                res.append([start, end])
+            else:
+                prevEnd = res[-1][1]
+                if prevEnd >= start:
+                    res[-1][1] = max(res[-1][1], end)
+                else:
+                    res.append([start, end])
+        
+        return res
